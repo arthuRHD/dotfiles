@@ -13,12 +13,8 @@ export PYENV_DIR="$HOME/.pyenv"
 export DART_CACHE_DIR="$HOME/.pub-cache"
 export TFENV_HOME="$HOME/.tfenv"
 
-# scaneo specific
-export BB_HOME="/opt/scaneo/"
-export MACHINE_IP=192.168.52.128
-
 # all
-export PATH=$BB_HOME:$JAVA_HOME/bin:$TFENV_HOME/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools/bin:$HOME/bin:$HOME_LOCAL/bin:$USR_LOCAL/bin:$GO_DIR/bin:$DART_CACHE_DIR/bin:$PYENV_DIR/bin:$PATH
+export PATH=$JAVA_HOME/bin:$TFENV_HOME/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools/bin:$HOME/bin:$HOME_LOCAL/bin:$USR_LOCAL/bin:$GO_DIR/bin:$DART_CACHE_DIR/bin:$PYENV_DIR/bin:$PATH
 
 # ohmyzsh configurations
 
@@ -45,7 +41,6 @@ plugins=(
   web-search # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/web-search
 )
 
-
 # custom commands
 
 alias adb_show_layoutbounds='adb shell setprop debug.layout true ; adb shell service call activity 1599295570'
@@ -57,21 +52,9 @@ alias adb_go_settings='adb shell am start -a android.settings.SETTINGS'
 alias adb_go_home='adb shell am start -a android.intent.action.MAIN -c android.intent.category.HOME'
 alias adb_go_wifi='adb shell am start -a android.intent.action.MAIN -n com.android.settings/.wifi.WifiSettings'
 
-# budgetbox
-
-alias reset_scaneo_db="mysql -h localhost -P 3308 -u root --execute='source /home/arichard/workspace/pssbb/pssbb-scripting/src/etc/sql/createDatabase_Scaneo.sql'"
-alias bitwarden="cat ~/.bitwarden | xclip -sel clip"
-
-init_pyenv () {
-	eval "$(pyenv init -)"
-	eval "$(pyenv virtualenv-init -)"
-}
-
 # Loading configurations
 
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 source $ZSH/oh-my-zsh.sh
