@@ -1,0 +1,16 @@
+[user]
+    name = Arthur RICHARD
+[apply]
+    whitespace = fix
+[core]
+    whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+    autocrlf = input
+    editor = nano
+[commit]
+	gpgsign = true
+[push]
+	autoSetupRemote = true
+[pull]
+	rebase = true
+[init]
+	defaultBranch = main

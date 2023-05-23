@@ -1,23 +1,34 @@
+# load colors
+
+autoload -U colors && colors	
+PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
+
 # global environmental variables
 
 export LANG=fr_FR.UTF-8
-export ZSH="$HOME/.oh-my-zsh"
+export OMZ="$HOME/.oh-my-zsh"
 export ANDROID_HOME="$HOME/Android/Sdk"
-export NVM_DIR="$HOME/.nvm"
 export SDKMAN_DIR="$HOME/.sdkman"
-export GO_DIR="/usr/local/go"
-export JAVA_HOME="$HOME/.sdkman/candidates/java/current"
 export USR_LOCAL="/usr/local"
+export GO_DIR="$USR_LOCAL/go"
+export JAVA_HOME="$SDKMAN_DIR/candidates/java/current"
 export HOME_LOCAL="$HOME/.local"
 export PYENV_DIR="$HOME/.pyenv"
 export DART_CACHE_DIR="$HOME/.pub-cache"
 export TFENV_HOME="$HOME/.tfenv"
 
-# all
 export PATH=$JAVA_HOME/bin:$TFENV_HOME/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools/bin:$HOME/bin:$HOME_LOCAL/bin:$USR_LOCAL/bin:$GO_DIR/bin:$DART_CACHE_DIR/bin:$PYENV_DIR/bin:$PATH
+
+# history
+
+HISTSIZE=10000000
+SAVEHIST=10000000
+HISTTIMEFORMAT="%F %T "
+HISTCONTROL=ignoreboth
 
 # ohmyzsh configurations
 
+EDITOR=code
 VSCODE=code
 ZSH_THEME="nicoulaj"
 DISABLE_MAGIC_FUNCTIONS="true"
@@ -29,16 +40,16 @@ ZSH_WEB_SEARCH_ENGINES=(
     google "https://www.google.com/search?q="
 )
 
-plugins=(
-  git # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git
-  python # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/python
-  sudo # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/sudo
-  adb # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/adb
-  gitignore # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/gitignore
-  flutter # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/flutter
-  vscode # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/vscode
-  kubectl # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/kubectl
-  web-search # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/web-search
+plugins=( # to add more:  https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
+  git
+  python
+  sudo
+  adb
+  gitignore
+  flutter
+  vscode
+  kubectl
+  web-search
 )
 
 # custom commands
@@ -51,11 +62,14 @@ alias adb_shutdown='adb shell reboot -p'
 alias adb_go_settings='adb shell am start -a android.settings.SETTINGS'
 alias adb_go_home='adb shell am start -a android.intent.action.MAIN -c android.intent.category.HOME'
 alias adb_go_wifi='adb shell am start -a android.intent.action.MAIN -n com.android.settings/.wifi.WifiSettings'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 
 # Loading configurations
 
-[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+[[ -s "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+[[ -s "$OMZ/oh-my-zsh.sh" ]] && source "$OMZ/oh-my-zsh.sh"
 
-source $ZSH/oh-my-zsh.sh
 source <(kubectl completion zsh)
